@@ -10,21 +10,17 @@ class User
 
   # Returns true if it is the user's birthday today
   def birthday?
-    if (@date_of_birth.day == Date.today.day) && (@date_of_birth.month == Date.today.month)
-      'true'
-    else
-      'false'
-    end
+    @date_of_birth.day == Date.today.day && @date_of_birth.month == Date.today.month
   end
-
+  
   # Returns an Integer representing the user's current age
   def age
-    if @date_of_birth.month < Date.today.month || (@date_of_birth.month == Date.today.month && @date_of_birth.day <= Date.today.day)
-        Date.today.year - @date_of_birth.year
-    else
-      (Date.today.year - @date_of_birth.year) - 1
-    end
+    today = Date.today
+    age = today.year - @date_of_birth.year
+    age -= 1 if today.month < @date_of_birth.month || (today.month == @date_of_birth.month && today.day < @date_of_birth.day)
+    age
   end
+  
 
   # Returns a Date object for the user's current upcoming birthday
   #
